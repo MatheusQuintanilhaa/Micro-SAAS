@@ -22,6 +22,7 @@ import { z } from "zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 type FormSchema = z.infer<typeof formSchema>;
 
@@ -33,6 +34,14 @@ const LoginForm = () => {
       password: "",
     },
   });
+
+  const handleGoogleSign = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/app" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex h-screen">
       <div className="flex h-screen w-1/2 flex-col items-center justify-center p-4">
@@ -81,6 +90,12 @@ const LoginForm = () => {
                 <Button>Fazer Login</Button>
               </form>
             </Form>
+            <div className="flex items-center justify-center">Ou </div>
+            <div>
+              <Button onClick={() => handleGoogleSign()}>
+                Fazer Login com Google
+              </Button>
+            </div>
             <div className="text-muted-foreground mt-4 flex items-center justify-between text-sm">
               Ainda não possui uma conta?{" "}
               <Link href="/register">Criar conta</Link>
