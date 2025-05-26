@@ -1,7 +1,7 @@
-import { Button } from "@/app/_components/ui/button"
-import { Separator } from "@/app/_components/ui/separator"
-import { SidebarTrigger } from "@/app/_components/ui/sidebar"
-import { ModeToggle } from "./theme/toggle-theme"
+import { Button } from "@/app/_components/ui/button";
+import { Separator } from "@/app/_components/ui/separator";
+import { SidebarTrigger } from "@/app/_components/ui/sidebar";
+import { ModeToggle } from "./theme/toggle-theme";
 
 export function SiteHeader() {
   return (
@@ -12,7 +12,8 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Documents</h1>
+        {/*  Organização de fluxos de atividades */}
+        <h1 className="text-base font-medium">Workflows</h1>
         <div className="ml-auto flex items-center gap-2">
           <ModeToggle />
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
@@ -28,5 +29,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

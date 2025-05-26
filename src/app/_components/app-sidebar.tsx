@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -11,18 +11,18 @@ import {
   IconFileWord,
   IconFolder,
   IconHelp,
-  IconInnerShadowTop,
+  // IconInnerShadowTop,
   IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavDocuments } from "@/app/_components/nav-documents"
-import { NavMain } from "@/app/_components/nav-main"
-import { NavSecondary } from "@/app/_components/nav-secondary"
-import { NavUser } from "@/app/_components/nav-user"
+import { NavDocuments } from "@/app/_components/nav-documents";
+import { NavMain } from "@/app/_components/nav-main";
+import { NavSecondary } from "@/app/_components/nav-secondary";
+import { NavUser } from "@/app/_components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -31,15 +31,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/app/_components/ui/sidebar"
-import { Session } from "next-auth"
+} from "@/app/_components/ui/sidebar";
+import { Session } from "next-auth";
+import Image from "next/image";
 
 type NavUserProps = {
-  user: Session["user"] | undefined
-}
+  user: Session["user"] | undefined;
+};
 
 const data = {
-  
   navMain: [
     {
       title: "Dashboard",
@@ -149,11 +149,11 @@ const data = {
       icon: IconFileWord,
     },
   ],
-}
+};
 
-export function AppSidebar({user}: NavUserProps) {
+export function AppSidebar({ user }: NavUserProps) {
   return (
-    <Sidebar collapsible="offcanvas" >
+    <Sidebar collapsible="offcanvas">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -162,8 +162,15 @@ export function AppSidebar({user}: NavUserProps) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                {/* <IconInnerShadowTop className="!size-5" /> */}
+                <Image
+                  src="/images/logo.png"
+                  alt="CRMify logo"
+                  width={20}
+                  height={20}
+                  className="!size-8"
+                />
+                <span className="text-base font-semibold">CRMify</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -178,5 +185,5 @@ export function AppSidebar({user}: NavUserProps) {
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
