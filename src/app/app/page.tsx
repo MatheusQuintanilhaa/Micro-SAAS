@@ -7,8 +7,16 @@ import { Avatar, AvatarFallback } from "@/app/_components/ui/avatar";
 import { Users, Mail, Phone, Plus, Calendar } from "lucide-react";
 import { Button } from "@/app/_components/ui/button";
 
+type Client = {
+  id?: string;
+  email: string | null;
+  userName: string;
+  phone: string | null;
+  createdAt?: string | Date;
+};
+
 export default async function Page() {
-  const clients = await getClients();
+  const clients: Client[] = (await getClients()) ?? [];
 
   const getInitials = (name: string) => {
     return name
@@ -19,7 +27,7 @@ export default async function Page() {
       .slice(0, 2);
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string | Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
       day: '2-digit',
       month: '2-digit',

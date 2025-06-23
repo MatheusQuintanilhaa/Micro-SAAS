@@ -9,7 +9,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { clientSchema } from "../app/actions/schema";
-import { createClient } from "../app/actions";
 import { toast } from "sonner";
 
 type ClientSchema = z.infer<typeof clientSchema>
@@ -32,8 +31,21 @@ const AddClientSheet = () => {
         setIsLoading(true);
         
         try {
-            const result = await createClient(values);
+            const result = await fetch("/api/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userName: values.username,
+                    email: values.email,
+                    phone: values.phone
+                }),
+            })
             console.log("Cliente criado com sucesso:", result);
+
+            const data = await result.json()
+            console.log(data)
             
             form.reset();
             setOpen(false); // Fechar o sheet
@@ -42,7 +54,7 @@ const AddClientSheet = () => {
             console.error("Erro ao criar cliente:", error);
             
             // Mostrar mensagem de erro mais específica
-            const errorMessage = error instanceof Error 
+            const errorMessage = error instanceof Error
                 ? error.message 
                 : "Erro desconhecido ao criar cliente";
             
